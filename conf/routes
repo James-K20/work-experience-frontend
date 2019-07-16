@@ -6,7 +6,7 @@
 # An example controller showing a sample home page
 GET         /                    controllers.HomeController.index
 POST        /                    controllers.HomeController.postLogin
-
+GET         /success             controllers.HomeController.loggedIn(name: String)
 
 
 

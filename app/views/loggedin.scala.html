@@ -1,0 +1,42 @@
+@(person: Person)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Logged In</title>
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <div class="heading">
+            <h1>Your Profile</h1>
+            <a href="@routes.HomeController.index()">Log Out</a>
+        </div>
+        <div class="grid">
+            <div>
+                <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.purch.com%2Fh%2F1000%2FaHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA2Ny82NTQvb3JpZ2luYWwvbGF1Z2hpbmctbWFuLmpwZw%3D%3D&f=1" alt="profile photo">
+                <div>
+                    <p class="caption">@{person.name}, @{person.age}</p>
+                </div>
+            </div>
+            <div>
+                <h2>About me</h2>
+                <ul class="aboutme">
+                    <li>I am called @{person.name}</li>
+                    <li>I am @{person.age} years old</li>
+                    <li>I play the guitar very nice</li>
+                </ul>
+            </div>
+            <div>
+                <h2>Account Details</h2>
+                <ul class="aboutme">
+                    <li>Profile set to Public</li>
+                    <li>Joined 82 days ago</li>
+                    <li>15 Friends</li>
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Message @{person.name}</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

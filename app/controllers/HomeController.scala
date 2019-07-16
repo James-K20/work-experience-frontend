@@ -2,10 +2,8 @@ package controllers
 
 import connectors.BackEnd
 import javax.inject._
-import play.api.libs.json.{Json, OFormat}
 import play.api.mvc._
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -25,11 +23,24 @@ class HomeController @Inject()(backend: BackEnd, cc: ControllerComponents) exten
     Ok(views.html.index())
   }
 
+  def loggedIn(name: String) = Action.async { implicit request =>
+    backend.checklogin(name).map {
+      person =>
+        Ok(views.html.loggedin(person))
+    }.recover {
+      case _ =>
+        Redirect(routes.HomeController.index())
+    }
+  }
+
   def postLogin = Action.async { implicit request =>
     val name: String = request.body.asFormUrlEncoded.get("name").head
     backend.checklogin(name).map {
       person =>
-        Ok(Json.toJson(person))
+        Redirect(routes.HomeController.loggedIn(person.name))
+    }.recover {
+      case _ =>
+        Redirect(routes.HomeController.index())
     }
   }
 
